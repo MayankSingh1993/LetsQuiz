@@ -11,15 +11,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private String[] user= {"Teacher","Student"};
     private TextView loginUser, loginUser2;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         loginUser= findViewById(R.id.loginUser);
         Intent goToLogin =new Intent(RegisterActivity.this,MainActivity.class);
@@ -71,4 +79,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }
