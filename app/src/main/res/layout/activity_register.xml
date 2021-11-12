@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
     <LinearLayout
 
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linear_layout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -61,7 +61,7 @@
         tools:ignore="HardcodedText" />
 
     <LinearLayout
-        android:id="@+id/registerLayout"
+        android:id="@+id/register_layout"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Username"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -97,7 +97,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/Email"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -116,7 +116,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/pwd"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,6 +127,7 @@
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -135,17 +136,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/confirmPwd"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="Confirm Password"
-
             app:passwordToggleEnabled="true"
             tools:ignore="HardcodedText">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -155,6 +156,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign_up_button"
             android:layout_width="163dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -169,7 +171,7 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
