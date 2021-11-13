@@ -3,10 +3,10 @@
     <style name="Theme.LetsQuiz" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
 
-        <item name="colorPrimary">@color/material_blue_500</item>
+        <item name="colorPrimary">@color/btnBgColor</item>
 
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/borderColor</item>
+        <item name="colorPrimaryVariant">@color/btnBgColor</item>
+        <item name="colorOnPrimary">@color/btnBgColor</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/common_google_sign_btn_text_dark_600</item>
