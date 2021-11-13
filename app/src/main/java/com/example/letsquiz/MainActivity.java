@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,10 +16,10 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private TextInputEditText username, password;
-    private ProgressBar bar;
+    private ProgressBar progressBar;
     private Object TextInputLayout;
     private FirebaseAuth mAuth;
-    private TextView register, register1;
+    private TextView register;
     private AppCompatButton signInButton;
 
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         //Get reference of all the required views
         username =  findViewById(R.id.email);
         password =  findViewById(R.id.pwd);
-        bar =  findViewById(R.id.progress_bar);
+        progressBar =  findViewById(R.id.progress_bar);
         signInButton= findViewById(R.id.sign_in_button);
 
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         /*setting intent on register textview 1 to go to
           register activity */
         register = findViewById(R.id.register_user);
-        register.setText(Html.fromHtml(Utils.getColoredSpanned(getString(R.string.register),"#3CF436"))+" "+Utils.getColoredSpanned(getString(R.string.Sign_up),"#3CF436"));
+        register.setText(Utils.htmlFormat(Utils.getColoredSpanned(getString(R.string.register),"#FF000000")+" "+Utils.getColoredSpanned(getString(R.string.Sign_up),"#3CF436")));
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

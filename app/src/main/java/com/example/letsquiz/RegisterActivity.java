@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             reload();
         }
     }
@@ -64,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        signUpButton = findViewById(R.id.sign_up_button);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,16 +73,17 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         });
 
         loginUser = findViewById(R.id.loginUser);
+        loginUser.setText(
+                Utils.htmlFormat(
+                        Utils.getColoredSpanned(getString(R.string.sign_in_text), "#FF000000") + "" +
+                                Utils.getColoredSpanned(getString(R.string.Sign_in), "#3CF436")
+                )
+        );
         Intent goToLogin = new Intent(RegisterActivity.this, MainActivity.class);
         loginUser.setOnClickListener(v -> {
             startActivity(goToLogin);
 
         });
-        loginUser2 = findViewById(R.id.loginUser2);
-        loginUser2.setOnClickListener(v -> {
-                    startActivity(goToLogin);
-                }
-        );
 
 
         // Take the instance of Spinner and
