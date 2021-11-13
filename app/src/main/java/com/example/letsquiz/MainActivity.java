@@ -3,8 +3,10 @@ package com.example.letsquiz;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private void reload() {
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         /*setting intent on register textview 1 to go to
           register activity */
         register = findViewById(R.id.register_user);
+        register.setText(Html.fromHtml(Utils.getColoredSpanned(getString(R.string.register),"#3CF436"))+" "+Utils.getColoredSpanned(getString(R.string.Sign_up),"#3CF436"));
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,17 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         /*setting intent on register textview 2 to go to
-          register activity */
-        register1 = findViewById(R.id.register_user2);
-        register1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goTo = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(goTo);
 
-            }
-        });
 
 
     }
