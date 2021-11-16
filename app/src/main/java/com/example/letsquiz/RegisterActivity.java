@@ -31,7 +31,7 @@ import java.util.Objects;
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // array that can user type
-    private String[] userType = {"Teacher", "Student"};
+    private final String[] userType = {"Teacher", "Student"};
 
     // Fields initialisation
     private TextView loginUser;
