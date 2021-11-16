@@ -23,20 +23,23 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // array that can user type
-    private String[] user = {"Teacher", "Student"};
+    private String[] userType = {"Teacher", "Student"};
 
     // Fields initialisation
     private TextView loginUser;
     private TextInputEditText username, email, password;
-    private ProgressBar bar;
+    private ProgressBar progressBar;
     private AppCompatButton signUpButton;
     private Spinner userSelection;
+    private Intent goToLogin;
 
     //firebase auth initialisation
     private FirebaseAuth mAuth;
@@ -62,6 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         username = findViewById(R.id.username);
         email = findViewById(R.id.email);
         password = findViewById(R.id.pwd);
+        progressBar =findViewById(R.id.progress_bar);
 
 
 
@@ -82,7 +86,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                                 Utils.getColoredSpanned(getString(R.string.Sign_in), "#3CF436")
                 )
         );
-        Intent goToLogin = new Intent(RegisterActivity.this, MainActivity.class);
+
+        goToLogin = new Intent(RegisterActivity.this, MainActivity.class);
         loginUser.setOnClickListener(v -> {
             startActivity(goToLogin);
 
@@ -98,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         // Create the instance of ArrayAdapter
         // having the list of courses
-        ArrayAdapter userArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, user);
+        ArrayAdapter userArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, userType);
 
 
         // set simple layout resource file
@@ -146,7 +151,23 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
+                        User user = new User(userSelection.getSelectedItem().toString(),userName,userEmail);
+
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(RegisterActivity.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    startActivity(goToLogin);
+
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            }
+                        });
 
 
                     } else {
@@ -167,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         // make toast of name of course
         // which is selected in spinner
-        Toast.makeText(getApplicationContext(), user[position], Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), userType[position], Toast.LENGTH_LONG).show();
     }
 
     @Override
