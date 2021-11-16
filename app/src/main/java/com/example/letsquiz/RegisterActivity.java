@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,14 +24,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Objects;
+
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     // array that can user type
     private String[] user = {"Teacher", "Student"};
 
     // Fields initialisation
-    private TextView loginUser, loginUser2;
-    private TextInputEditText username, email, password, confirmPassword;
+    private TextView loginUser;
+    private TextInputEditText username, email, password;
     private ProgressBar bar;
     private AppCompatButton signUpButton;
     private Spinner userSelection;
@@ -59,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         username = findViewById(R.id.username);
         email = findViewById(R.id.email);
         password = findViewById(R.id.pwd);
-        confirmPassword = findViewById(R.id.confirm_pwd);
+
 
 
         // Initialize Firebase Auth
@@ -109,32 +112,43 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void createUser() {
-        String userName = username.getText().toString();
-        String userEmail = email.getText().toString();
-        String userPwd = password.getText().toString();
-        String userConfirmPwd = confirmPassword.getText().toString();
-        // String userType = userSelection.getTransitionName().toString();
+        String userName = Objects.requireNonNull(username.getText()).toString();
+        String userEmail = Objects.requireNonNull(email.getText()).toString();
+        String userPwd = Objects.requireNonNull(password.getText()).toString();
+
         if (TextUtils.isEmpty(userName)) {
             username.setError("Username cannot be empty");
             username.requestFocus();
+            return;
         } else if (TextUtils.isEmpty(userEmail)) {
 
             email.setError("Email cannot be empty");
+            email.requestFocus();
+            return;
         } else if (TextUtils.isEmpty(userPwd)) {
 
             password.setError("Password cannot be empty");
-        } else if (TextUtils.isEmpty(userConfirmPwd)) {
+            password.requestFocus();
+            return;
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
+            email.setError("Please provide valid email");
+            email.requestFocus();
+            return;
+        } else if(userPwd.length()<6){
+            password.setError("Password length should be greater than 6");
+            password.requestFocus();
+            return;
 
-            confirmPassword.setError("Confirm password cannot be empty");
-        } else {
+        }else
+         {
             mAuth.createUserWithEmailAndPassword(userEmail, userPwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
                         Toast.makeText(RegisterActivity.this, "User Register Successfully", Toast.LENGTH_SHORT).show();
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
+
+
                     } else {
                         Toast.makeText(RegisterActivity.this, "Registration ERROR!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
