@@ -20,4 +20,13 @@
     <color name="teal_200">#FFD600</color>
     <color name="common_google_signin_btn_text_dark_600">#FFAB00</color>
     <color name="common_google_sign_btn_text_dark_600">#FF6D00</color>
+
+    <style name="Theme.LetsQuiz.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.LetsQuiz.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.LetsQuiz.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

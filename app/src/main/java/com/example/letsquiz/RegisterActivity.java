@@ -90,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         goToLogin = new Intent(RegisterActivity.this, MainActivity.class);
         loginUser.setOnClickListener(v -> {
             startActivity(goToLogin);
+            finish();
 
         });
 

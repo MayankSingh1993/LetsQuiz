@@ -2,6 +2,7 @@ package com.example.letsquiz;
 
 public class User {
     public String user, username,email;
+    private String userId;
 
     public User() {
     }
@@ -24,4 +25,7 @@ public class User {
         return email;
     }
 
+    public void getUserId(String userId ) {
+        this.userId = userId;
+    }
 }

@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsQuiz">
         <activity
+            android:name=".StudentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherActivity"
+            android:exported="false"
+            android:label="@string/title_activity_teacher"
+            android:theme="@style/Theme.LetsQuiz.NoActionBar" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
